@@ -41,6 +41,7 @@ import org.broadinstitute.gatk.engine.crypt.CryptUtils;
 import org.broadinstitute.gatk.engine.crypt.GATKKey;
 import org.broadinstitute.gatk.utils.exceptions.UserException;
 import org.broadinstitute.gatk.utils.text.ListFileUtils;
+import htsjdk.samtools.sra.SRAAccession;
 
 import java.security.PublicKey;
 import java.util.ArrayList;
@@ -71,6 +72,10 @@ public abstract class CommandLineExecutable extends CommandLineProgram {
     private final Collection<Object> argumentSources = new ArrayList<Object>();
 
     protected static Logger logger = Logger.getLogger(CommandLineExecutable.class);
+
+    static {
+        SRAAccession.setAppVersionString("GATK " + getVersionNumber());
+    }
 
     /**
      * this is the function that the inheriting class can expect to have called
