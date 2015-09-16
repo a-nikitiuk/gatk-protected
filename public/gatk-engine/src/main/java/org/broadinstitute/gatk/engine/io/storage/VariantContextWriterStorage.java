@@ -175,6 +175,11 @@ public class VariantContextWriterStorage implements Storage<VariantContextWriter
         public void add(final VariantContext vc) {
             for ( final VariantContextWriter writer : writers ) writer.add(vc);
         }
+
+        @Override
+        public boolean checkError() {
+            return false;
+        }
     }
 
     public void add(VariantContext vc) {
@@ -224,5 +229,10 @@ public class VariantContextWriterStorage implements Storage<VariantContextWriter
         } catch (IOException e) {
             throw new UserException.CouldNotReadInputFile(file, "Error reading file in VCFWriterStorage: ", e);
         }
+    }
+
+    @Override
+    public boolean checkError() {
+        return false;
     }
 }

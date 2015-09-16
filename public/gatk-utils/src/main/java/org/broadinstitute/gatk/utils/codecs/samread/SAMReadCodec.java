@@ -120,4 +120,9 @@ public class SAMReadCodec extends AsciiFeatureCodec<SAMReadFeature> {
         // No header for this format
         return null;
     }
+
+    @Override
+    public boolean canDecode(final String path) {
+        return path.toLowerCase().endsWith(".sam");
+    }
 }

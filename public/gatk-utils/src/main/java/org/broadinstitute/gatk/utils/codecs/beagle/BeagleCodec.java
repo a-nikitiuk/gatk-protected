@@ -273,4 +273,10 @@ public class BeagleCodec extends AsciiFeatureCodec<BeagleFeature> implements Ref
 
         return bglFeature;
     }
+
+    @Override
+    public boolean canDecode(final String path) {
+        // not implemented yet
+        return false;
+    }
 }

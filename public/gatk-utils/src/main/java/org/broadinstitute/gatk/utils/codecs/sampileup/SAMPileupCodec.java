@@ -351,4 +351,10 @@ public class SAMPileupCodec extends AsciiFeatureCodec<SAMPileupFeature> {
         feature.setPileupBases(baseBuilder.toString());
         feature.setPileupQuals(qualBuilder.toString());
     }
+
+    @Override
+    public boolean canDecode(final String path) {
+        // not implemented yet
+        return false;
+    }
 }

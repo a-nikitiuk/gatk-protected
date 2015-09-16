@@ -90,6 +90,11 @@ public class GVCFWriterUnitTest extends BaseTest {
         public void add(VariantContext vc) {
             emitted.add(vc);
         }
+
+        @Override
+        public boolean checkError() {
+            return false;
+        }
     }
 
     private MockWriter mockWriter;

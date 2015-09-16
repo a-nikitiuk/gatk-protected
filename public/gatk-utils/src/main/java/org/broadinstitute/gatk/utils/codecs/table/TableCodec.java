@@ -123,4 +123,10 @@ public class TableCodec extends AsciiFeatureCodec<TableFeature> implements Refer
         }
         return header;
     }
+
+    @Override
+    public boolean canDecode(final String path) {
+        // not implemented yet
+        return false;
+    }
 }

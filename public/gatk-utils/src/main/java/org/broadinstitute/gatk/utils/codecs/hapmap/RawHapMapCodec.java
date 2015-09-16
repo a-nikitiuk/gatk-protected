@@ -122,4 +122,10 @@ public class RawHapMapCodec extends AsciiFeatureCodec<RawHapMapFeature> {
         // TODO: This approach may cause issues with files formatted with \r\n-style line-endings.
         return new FeatureCodecHeader(header, header.length() + 1);
     }
+
+    @Override
+    public boolean canDecode(final String path) {
+        // not implemented yet
+        return false;
+    }
 }

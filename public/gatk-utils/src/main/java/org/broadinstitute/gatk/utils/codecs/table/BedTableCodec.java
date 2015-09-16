@@ -55,4 +55,10 @@ public class BedTableCodec extends TableCodec implements ReferenceDependentFeatu
             throw new IllegalArgumentException("TableCodec line = " + line + " doesn't appear to be a valid table format");
         return new TableFeature(genomeLocParser.createGenomeLoc(split[0],Integer.parseInt(split[1])-1,Integer.parseInt(split[2])), Arrays.asList(split),header);
     }
+
+    @Override
+    public boolean canDecode(final String path) {
+        // not implemented yet
+        return false;
+    }
 }

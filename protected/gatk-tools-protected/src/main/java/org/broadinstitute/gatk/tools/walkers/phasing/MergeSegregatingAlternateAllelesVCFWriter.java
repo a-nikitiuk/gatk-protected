@@ -253,6 +253,11 @@ class MergeSegregatingAlternateAllelesVCFWriter implements VariantContextWriter 
         return getClass().getName();
     }
 
+    @Override
+    public boolean checkError() {
+        return false;
+    }
+
     private static class VCFRecord {
         public VariantContext vc;
         public boolean resultedFromMerge;

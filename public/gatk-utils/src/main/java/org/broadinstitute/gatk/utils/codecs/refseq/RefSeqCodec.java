@@ -168,4 +168,10 @@ public class RefSeqCodec extends AsciiFeatureCodec<RefSeqFeature> implements Ref
         // No header for this format
         return null;
     }
+
+    @Override
+    public boolean canDecode(final String path) {
+        // not implemented yet
+        return false;
+    }
 }

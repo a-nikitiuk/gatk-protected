@@ -341,4 +341,9 @@ public class GVCFWriter implements VariantContextWriter {
             }
         }
     }
+
+    @Override
+    public boolean checkError() {
+        return false;
+    }
 }

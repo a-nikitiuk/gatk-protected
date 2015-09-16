@@ -287,6 +287,11 @@ public class VariantContextWriterStub implements Stub<VariantContextWriter>, Var
         return (getOutputFile() == null) ? "(Stream)" : getOutputFile().getAbsolutePath();
     }
 
+    @Override
+    public boolean checkError() {
+        return false;
+    }
+
     /**
      * Should we also write a BCF file alongside our VCF file for testing
      *
