@@ -1150,15 +1150,15 @@ public class SAMDataSource {
                 if (threadAllocation.getNumIOThreads() > 0)
                     blockInputStream = new BlockInputStream(dispatcher,readerID,false);
                 SamReaderFactory factory = SamReaderFactory.makeDefault()
-                        .referenceSequence(referenceFile)
                         .validationStringency(validationStringency)
-                        .setOption(SamReaderFactory.Option.EAGERLY_DECODE, false)
-                        .setOption(SamReaderFactory.Option.INCLUDE_SOURCE_IN_RECORDS, true);
+                        .setOption(SamReaderFactory.Option.EAGERLY_DECODE, false);
 
                 if (SRAAccession.isValid(readerID.getSamFile().getPath())) {
                     reader = factory.open(SamInputResource.of(new SRAAccession(readerID.getSamFile().getPath())));
                 } else {
-                    reader = factory.open(readerID.getSamFile());
+                    reader = factory.referenceSequence(referenceFile)
+                        .setOption(SamReaderFactory.Option.INCLUDE_SOURCE_IN_RECORDS, true)
+                        .open(readerID.getSamFile());
                 }
 
             } catch ( RuntimeIOException e ) {
