@@ -53,6 +53,7 @@ package org.broadinstitute.gatk.tools.walkers.haplotypecaller;
 
 import com.google.java.contract.Ensures;
 import htsjdk.samtools.SAMFileWriter;
+import htsjdk.samtools.reference.ReferenceSequenceFile;
 import htsjdk.variant.variantcontext.*;
 import htsjdk.variant.variantcontext.writer.VariantContextWriter;
 import htsjdk.variant.vcf.*;
@@ -462,7 +463,7 @@ public class HaplotypeCaller extends ActiveRegionWalker<List<VariantContext>, In
     private HaplotypeCallerGenotypingEngine genotypingEngine = null;
 
     // fasta reference reader to supplement the edges of the reference sequence
-    protected CachingIndexedFastaSequenceFile referenceReader;
+    protected ReferenceSequenceFile referenceReader;
 
     // reference base padding size
     private static final int REFERENCE_PADDING = 500;
@@ -626,12 +627,8 @@ public class HaplotypeCaller extends ActiveRegionWalker<List<VariantContext>, In
         //now that we have all the VCF headers, initialize the annotations (this is particularly important to turn off RankSumTest dithering in integration tests)
         annotationEngine.invokeAnnotationInitializationMethods(headerInfo);
 
-        try {
-            // fasta reference reader to supplement the edges of the reference sequence
-            referenceReader = new CachingIndexedFastaSequenceFile(getToolkit().getArguments().referenceFile);
-        } catch( FileNotFoundException e ) {
-            throw new UserException.CouldNotReadInputFile(getToolkit().getArguments().referenceFile, e);
-        }
+        // fasta reference reader to supplement the edges of the reference sequence
+        referenceReader = CachingIndexedFastaSequenceFile.checkAndCreate(getToolkit().getArguments().referenceFile);
 
         // create and setup the assembler
         assemblyEngine = new ReadThreadingAssembler(RTAC.maxNumHaplotypesInPopulation, RTAC.kmerSizes, RTAC.dontIncreaseKmerSizesForCycles, RTAC.allowNonUniqueKmersInRef, RTAC.numPruningSamples);
